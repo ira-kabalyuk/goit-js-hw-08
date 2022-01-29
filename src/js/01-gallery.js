@@ -1,17 +1,16 @@
-import { galleryItems } from './gallery-items.js';
-import SimpleLightbox from 'simplelightbox' ;
-
+import galleryItemTpl from '../templates/gallery-item.hbs';
+import galleryItems from './gallery.json';
+import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const gallery = document.querySelector('.gallery');
 
-const item = galleryItems.map(({preview, original, description}) => 
-  `<a href="${original}" class="gallery__item">
-  <img class="gallery__image" src="${preview}" alt="${description}">  
-  </a>`
-).join("");
+const item = galleryItemTpl(galleryItems); // для всех карточек
+// const item = galleryItems.map(galleryItrmTpl).join(""); для одной карточки
 
 gallery.insertAdjacentHTML("afterbegin", item);
 
-new SimpleLightbox('.gallery a', {captionsData: 'alt', captionDelay: 250,});
+new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250, });
+
+
 
